@@ -13,6 +13,20 @@ function getHasil(comp, player) {
 }
 
 
+function putar() {
+    const imgComputer = document.querySelector('.img-komputer');
+    const gambar = ['gajah', 'orang', 'semut'];
+    let i = 0;
+    const waktuMulai = new Date().getTime();
+    setInterval(function() {
+        if( new Date().getTime() - waktuMulai > 1000 ) {
+            clearInterval;
+            return;
+        }
+        imgComputer.setAttribute('src', './img/'+ gambar[i++] + '.png');
+        if( i == gambar.length ) i = 0;
+    }, 100);
+}
 
 
 const pilihan = document.querySelectorAll('li img');
@@ -22,11 +36,15 @@ pilihan.forEach(function(pil){
         const pilihanPlayer = pil.className;
         const hasil = getHasil(pilihanComputer, pilihanPlayer);
 
-        const imgComputer = document.querySelector('.img-komputer');
-        imgComputer.setAttribute('src', 'img/' + pilihanComputer + '.png');
+        putar();
 
-        const info = document.querySelector('.info');
-        info.innerHTML = hasil;
+        setTimeout(function() {
+            const imgComputer = document.querySelector('.img-komputer');
+            imgComputer.setAttribute('src', 'img/' + pilihanComputer + '.png');
+    
+            const info = document.querySelector('.info');
+            info.innerHTML = hasil;
+        }, 1000);     
     });
 });
 
